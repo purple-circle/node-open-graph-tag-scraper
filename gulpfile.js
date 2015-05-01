@@ -41,3 +41,7 @@ gulp.task('test', function () {
 gulp.task("watch", function() {
   gulp.watch(["index.js", "test/**/*"], ["lint"]);
 });
+
+gulp.task("watch-test", function() {
+  gulp.watch(["index.js", "test/**/*"], ["lint", "test"]);
+});

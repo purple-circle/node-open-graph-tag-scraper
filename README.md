@@ -1,4 +1,4 @@
-# Get Open Graph tags from an url
+# Get Open Graph tags from an url [![Build Status](https://travis-ci.org/purple-circle/node-open-graph-tag-scraper.svg)](https://travis-ci.org/purple-circle/node-open-graph-tag-scraper)
 
 ## To run
 

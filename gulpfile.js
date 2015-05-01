@@ -33,7 +33,7 @@ gulp.task("lint", function() {
 });
 
 
-gulp.task('test', function () {
+gulp.task('test', ["lint"], function () {
   return gulp.src('test/specs/**/*.js', {read: false})
     .pipe(mocha({reporter: 'spec'}));
 });
@@ -43,5 +43,5 @@ gulp.task("watch", function() {
 });
 
 gulp.task("watch-test", function() {
-  gulp.watch(["index.js", "test/**/*"], ["lint", "test"]);
+  gulp.watch(["index.js", "test/**/*"], ["test"]);
 });

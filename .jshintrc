@@ -1,0 +1,9 @@
+{
+  "node": true,
+  "globals": {
+    "describe": false,
+    "it": false,
+    "module": false,
+    "require": false
+  }
+}

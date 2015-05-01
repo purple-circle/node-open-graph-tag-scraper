@@ -8,7 +8,7 @@
     "url": "https://github.com/purple-circle/node-open-graph-tag-scraper"
   },
   "scripts": {
-    "test": "node test/server.js && gulp test"
+    "test": "node test/server.js & gulp test"
   },
   "author": "",
   "license": "ISC",

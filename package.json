@@ -1,5 +1,5 @@
 {
-  "name": "node-open-graph-tag-scraper",
+  "name": "open-graph-tag-scraper",
   "version": "0.0.1",
   "description": "Scraping them crazy Facebook Open Graph meta tags!",
   "main": "index.js",

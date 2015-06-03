@@ -1,6 +1,6 @@
 {
   "name": "open-graph-tag-scraper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Scraping them crazy Facebook Open Graph meta tags!",
   "main": "index.js",
   "repository": {

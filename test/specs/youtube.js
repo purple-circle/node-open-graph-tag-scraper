@@ -13,23 +13,23 @@ describe('Youtube example', function() {
     youtubeTags.should.eventually.not.be.empty.notify(done);
   });
 
-  it('Should not have description property', function (done) {
+  it('Should not have keywords property', function (done) {
     var youtubeTags = openTags.fetch("http://localhost:3000/youtube.html");
-    youtubeTags.should.eventually.not.have.property("description").notify(done);
+    youtubeTags.should.eventually.not.have.property("keywords").notify(done);
   });
 
-  it('Should have og:url property', function (done) {
+  it('Should have url property', function (done) {
     var youtubeTags = openTags.fetch("http://localhost:3000/youtube.html");
-    youtubeTags.should.eventually.have.property("og:url").notify(done);
+    youtubeTags.should.eventually.have.property("url").notify(done);
   });
 
-  it('Should have og:site_name property', function (done) {
+  it('Should have site_name property', function (done) {
     var youtubeTags = openTags.fetch("http://localhost:3000/youtube.html");
-    youtubeTags.should.eventually.have.property("og:site_name").notify(done);
+    youtubeTags.should.eventually.have.property("site_name").notify(done);
   });
-  it('Should have og:title property', function (done) {
+  it('Should have title property', function (done) {
     var youtubeTags = openTags.fetch("http://localhost:3000/youtube.html");
-    youtubeTags.should.eventually.have.property("og:title").notify(done);
+    youtubeTags.should.eventually.have.property("title").notify(done);
   });
 
 });

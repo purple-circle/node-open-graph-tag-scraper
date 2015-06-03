@@ -11,9 +11,9 @@ describe('Parse html', function() {
     return youtubeTags.should.be.empty;
   });
 
-  it('Should return property og:hello', function() {
+  it('Should return property hello', function() {
     var youtubeTags = openTags.parseHtml('<meta property="og:hello" content="world">');
-    youtubeTags.should.have.property("og:hello");
+    youtubeTags.should.have.property("hello");
   });
 
 });

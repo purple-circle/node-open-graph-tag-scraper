@@ -17,7 +17,8 @@ openTags.parseHtml = function(html) {
   });
 
   metaTags.each(function(i, element) {
-    result[element.attribs.property] = element.attribs.content;
+    var attrs = element.attribs;
+    result[attrs.property.replace("og:", "")] = attrs.content;
   });
 
   return result;

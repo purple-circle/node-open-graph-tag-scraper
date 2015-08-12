@@ -18,7 +18,7 @@ openTags.parseHtml = function(html) {
 
   metaTags.each(function(i, element) {
     var attrs = element.attribs;
-    result[attrs.property.replace("og:", "")] = attrs.content;
+    result[attrs.property.replace("og:", "").toLowerCase()] = attrs.content;
   });
 
   return result;
@@ -29,9 +29,7 @@ openTags.fetch = function(url) {
 
   request(url, function (error, response, data) {
     if (!error && response.statusCode === 200) {
-      var result = openTags.parseHtml(data);
-
-      deferred.resolve(result);
+      deferred.resolve(openTags.parseHtml(data));
     } else {
       deferred.reject({error: error});
     }

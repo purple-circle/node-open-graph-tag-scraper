@@ -1,41 +1,48 @@
-"use strict";
+(function() {
+  'use strict';
+  var Q, cheerio, openTags, request;
 
-var request = require('request');
-var cheerio = require('cheerio');
-var Q = require("q");
+  request = require('request');
 
-var openTags = {};
+  cheerio = require('cheerio');
 
-openTags.parseHtml = function(html) {
-  var result = {};
-  var $ = cheerio.load(html);
-  var metaTags = $("meta").filter(function() {
-    if(!this.attribs.property) {
-      return false;
-    }
-    return this.attribs.property.match("og:");
-  });
+  Q = require('q');
 
-  metaTags.each(function(i, element) {
-    var attrs = element.attribs;
-    result[attrs.property.replace("og:", "").toLowerCase()] = attrs.content;
-  });
+  openTags = {};
 
-  return result;
-};
+  openTags.parseHtml = function(html) {
+    var $, metaTags, result;
+    result = {};
+    $ = cheerio.load(html);
+    metaTags = $('meta').filter(function() {
+      if (!this.attribs.property) {
+        return false;
+      }
+      return this.attribs.property.match('og:');
+    });
+    metaTags.each(function(i, element) {
+      var attrs;
+      attrs = element.attribs;
+      return result[attrs.property.replace('og:', '').toLowerCase()] = attrs.content;
+    });
+    return result;
+  };
 
-openTags.fetch = function(url) {
-  var deferred = Q.defer();
+  openTags.fetch = function(url) {
+    var deferred;
+    deferred = Q.defer();
+    request(url, function(error, response, data) {
+      if (!error && (response != null ? response.statusCode : void 0) === 200) {
+        return deferred.resolve(openTags.parseHtml(data));
+      } else {
+        return deferred.reject({
+          error: error
+        });
+      }
+    });
+    return deferred.promise;
+  };
 
-  request(url, function (error, response, data) {
-    if (!error && response.statusCode === 200) {
-      deferred.resolve(openTags.parseHtml(data));
-    } else {
-      deferred.reject({error: error});
-    }
-  });
+  module.exports = openTags;
 
-  return deferred.promise;
-};
-
-module.exports = openTags;
+}).call(this);

@@ -1,9 +1,11 @@
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var jshint = require("gulp-jshint");
-var plumber = require('gulp-plumber');
+var plumber = require("gulp-plumber");
 var notify = require("gulp-notify");
 var mocha = require("gulp-mocha");
+var coffee = require('gulp-coffee');
+var coffeelint = require('gulp-coffeelint');
 
 var errorHandler = notify.onError("Error: <%= error.message %>");
 
@@ -30,6 +32,24 @@ gulp.task("lint", function() {
       }).join("\n");
       return file.relative + " (" + file.jshint.results.length + " errors)\n" + errors;
     }));
+});
+
+gulp.task('coffeelint', function () {
+  return gulp
+    .src('src/**/*.coffee')
+    .pipe(plumber({errorHandler: errorHandler}))
+    .pipe(coffeelint())
+    .pipe(coffeelint.reporter())
+    .on('error', gutil.log);
+});
+
+gulp.task('coffee', ['coffeelint'], function () {
+  return gulp
+    .src('src/**/*.coffee')
+    .pipe(plumber({errorHandler: errorHandler}))
+    .pipe(coffee())
+    .on('error', gutil.log)
+    .pipe(gulp.dest('./'));
 });
 
 

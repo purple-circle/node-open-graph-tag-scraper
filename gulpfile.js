@@ -65,3 +65,9 @@ gulp.task("watch", function() {
 gulp.task("watch-test", function() {
   gulp.watch(["index.js", "test/**/*"], ["test"]);
 });
+
+gulp.task("watch-coffee", function() {
+  gulp.watch('src/**/*.coffee', ['coffee']);
+});
+
+gulp.task('default', ['watch-coffee', 'watch-test', 'watch']);

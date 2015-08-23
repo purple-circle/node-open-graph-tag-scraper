@@ -6,7 +6,6 @@ var notify = require("gulp-notify");
 var mocha = require("gulp-mocha");
 var coffee = require('gulp-coffee');
 var coffeelint = require('gulp-coffeelint');
-
 var errorHandler = notify.onError("Error: <%= error.message %>");
 
 gulp.task("lint", function() {
@@ -25,11 +24,13 @@ gulp.task("lint", function() {
         return false;
       }
 
-      var errors = file.jshint.results.map(function(data) {
+      var getErrors = function(data) {
         if (data.error) {
           return "(" + data.error.line + ":" + data.error.character + ") " + data.error.reason;
         }
-      }).join("\n");
+      };
+
+      var errors = file.jshint.results.map(getErrors).join("\n");
       return file.relative + " (" + file.jshint.results.length + " errors)\n" + errors;
     }));
 });
@@ -51,7 +52,6 @@ gulp.task('coffee', ['coffeelint'], function () {
     .on('error', gutil.log)
     .pipe(gulp.dest('./'));
 });
-
 
 gulp.task('test', ["lint"], function () {
   return gulp.src('test/specs/**/*.js', {read: false})

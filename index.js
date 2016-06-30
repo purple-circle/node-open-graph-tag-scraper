@@ -20,10 +20,10 @@
       }
       return this.attribs.property.match('og:');
     });
-    metaTags.each(function(i, element) {
-      var attrs;
-      attrs = element.attribs;
-      return result[attrs.property.replace('og:', '').toLowerCase()] = attrs.content;
+    metaTags.each(function(i, arg) {
+      var attribs;
+      attribs = arg.attribs;
+      return result[attribs.property.replace('og:', '').toLowerCase()] = attribs.content;
     });
     return result;
   };

@@ -1,20 +1,20 @@
-var gulp = require("gulp");
-var gutil = require("gulp-util");
-var jshint = require("gulp-jshint");
-var plumber = require("gulp-plumber");
-var notify = require("gulp-notify");
-var mocha = require("gulp-mocha");
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var jshint = require('gulp-jshint');
+var plumber = require('gulp-plumber');
+var notify = require('gulp-notify');
+var mocha = require('gulp-mocha');
 var coffee = require('gulp-coffee');
 var coffeelint = require('gulp-coffeelint');
-var errorHandler = notify.onError("Error: <%= error.message %>");
+var errorHandler = notify.onError('Error: <%= error.message %>');
 
-gulp.task("lint", function() {
-  return gulp.src(["index.js", "test/**/*"])
+gulp.task('lint', function() {
+  return gulp.src(['index.js', 'test/**/*'])
     .pipe(plumber({
       errorHandler: errorHandler
     }))
     .pipe(jshint())
-    .pipe(jshint.reporter("default"))
+    .pipe(jshint.reporter('default'))
     .on('error', gutil.beep)
     .pipe(notify(function(file) {
       if (!file.jshint) {
@@ -26,12 +26,12 @@ gulp.task("lint", function() {
 
       var getErrors = function(data) {
         if (data.error) {
-          return "(" + data.error.line + ":" + data.error.character + ") " + data.error.reason;
+          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason;
         }
       };
 
-      var errors = file.jshint.results.map(getErrors).join("\n");
-      return file.relative + " (" + file.jshint.results.length + " errors)\n" + errors;
+      var errors = file.jshint.results.map(getErrors).join('\n');
+      return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
     }));
 });
 
@@ -53,20 +53,20 @@ gulp.task('coffee', ['coffeelint'], function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('test', ["lint"], function () {
+gulp.task('test', ['lint'], function () {
   return gulp.src('test/specs/**/*.js', {read: false})
     .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task("watch", function() {
-  gulp.watch(["index.js", "test/**/*"], ["lint"]);
+gulp.task('watch', function() {
+  gulp.watch(['index.js', 'test/**/*'], ['lint']);
 });
 
-gulp.task("watch-test", function() {
-  gulp.watch(["index.js", "test/**/*"], ["test"]);
+gulp.task('watch-test', function() {
+  gulp.watch(['index.js', 'test/**/*'], ['test']);
 });
 
-gulp.task("watch-coffee", function() {
+gulp.task('watch-coffee', function() {
   gulp.watch('src/**/*.coffee', ['coffee']);
 });
 

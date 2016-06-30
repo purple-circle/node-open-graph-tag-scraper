@@ -13,19 +13,18 @@ openTags.parseHtml = (html) ->
       return false
     @attribs.property.match 'og:'
 
-  metaTags.each (i, element) ->
-    attrs = element.attribs
-    result[attrs.property.replace('og:', '').toLowerCase()] = attrs.content
+  metaTags.each (i, {attribs}) ->
+    result[attribs.property.replace('og:', '').toLowerCase()] = attribs.content
 
   result
 
 openTags.fetch = (url) ->
   deferred = Q.defer()
   request url, (error, response, data) ->
-    if !error and response?.statusCode is 200
-      deferred.resolve openTags.parseHtml(data)
+    if not error and response?.statusCode is 200
+      deferred.resolve(openTags.parseHtml(data))
     else
-      deferred.reject error: error
+      deferred.reject({error})
 
   deferred.promise
 

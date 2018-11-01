@@ -23,7 +23,7 @@
     "coffee-script": "^1.9.3",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
-    "gulp-coffee": "^3.0.2",
+    "gulp-coffee": "^3.0.3",
     "gulp-coffeelint": "^0.6.0",
     "gulp-jshint": "^2.1.0",
     "gulp-mocha": "^6.0.0",
